@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simone Stellati | Astrophysicist &amp; PhD Student</title>
+  <meta name="description"
+    content="Personal academic website of Simone Stellati, PhD Student in Astronomy, Astrophysics and Space Science at Sapienza Università di Roma. Specialising in CMB cosmology, LiteBIRD mission, and observational instrumentation." />
+  <meta name="keywords"
+    content="Simone Stellati, astrophysics, CMB, LiteBIRD, Sapienza, cosmology, B-mode polarization" />
+  <meta name="author" content="Simone Stellati" />
+  <meta property="og:title" content="Simone Stellati | Astrophysicist" />
+  <meta property="og:description"
+    content="PhD student in Astronomy and Astrophysics at Sapienza Università di Roma. CMB cosmology, LiteBIRD, observational instrumentation." />
+  <meta property="og:type" content="website" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Crimson+Pro:ital,wght@0,400;0,600;1,400&amp;display=swap"
+    rel="stylesheet" />
+  <script src="photos.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Crimson Pro', 'serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html {
+      background-color: #06070d;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #06070d;
+      color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0c0e1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2e3459;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #818cf8;
+    }
+
+    .stars-bg {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: var(--min-opacity);
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: var(--max-opacity);
+        transform: scale(1.4);
+      }
+    }
+
+    .nav-link {
+      position: relative;
+      color: #94a3b8;
+      transition: color 0.2s;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #818cf8, #7dd3fc);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #e2e8f0;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: #e2e8f0;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #818cf8;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #f1f5f9;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #818cf8, transparent);
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Carousel Styles */
+    #photo-carousel {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid rgba(129, 140, 248, 0.45);
+      box-shadow: 0 0 25px rgba(125, 211, 252, 0.15);
+      background: #06070d;
+    }
+
+    .carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out, transform 4s ease-in-out;
+      transform: scale(1.05);
+      z-index: 1;
+    }
+
+    .carousel-img.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 2;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(129, 140, 248, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: #818cf8;
+      transform: scale(1.2);
+    }
+
+    /* Inner shadow for premium feel */
+    #photo-carousel::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: inset 0 0 20px rgba(6, 7, 13, 0.8);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .glass-card {
+      background: rgba(19, 22, 37, 0.7);
+      border: 1px solid rgba(129, 140, 248, 0.12);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(129, 140, 248, 0.3);
+      box-shadow: 0 8px 32px rgba(129, 140, 248, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .pub-card {
+      background: rgba(13, 15, 26, 0.8);
+      border: 1px solid rgba(125, 211, 252, 0.1);
+      border-left: 3px solid #818cf8;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      transition: border-left-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .pub-card:hover {
+      border-left-color: #7dd3fc;
+      box-shadow: 0 4px 20px rgba(125, 211, 252, 0.06);
+      transform: translateX(4px);
+    }
+
+    .skill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+
+    .skill-badge:hover {
+      transform: translateY(-1px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #818cf8 0%, #7dd3fc 50%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, rgba(129, 140, 248, 0.15), rgba(125, 211, 252, 0.1));
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      color: #a5b4fc;
+      transition: all 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, rgba(129, 140, 248, 0.3), rgba(125, 211, 252, 0.2));
+      border-color: rgba(129, 140, 248, 0.6);
+      color: #e0e7ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(129, 140, 248, 0.2);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #94a3b8;
+      transition: all 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+      color: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
+    .contact-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      background: rgba(19, 22, 37, 0.6);
+      border: 1px solid rgba(129, 140, 248, 0.12);
+      color: #94a3b8;
+      font-size: 0.875rem;
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+
+    .contact-icon:hover {
+      border-color: rgba(129, 140, 248, 0.35);
+      color: #e2e8f0;
+      background: rgba(29, 32, 57, 0.8);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(129, 140, 248, 0.1);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.045) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      transition: left 0.12s ease, top 0.12s ease;
+    }
+
+    .timeline-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #0c0e1a;
+      border: 2px solid #818cf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+      transition: background 0.2s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: #818cf8;
+    }
+
+    #mobile-menu {
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    #mobile-menu.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .section-sep {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.2), transparent);
+    }
+  </style>
+</head>
+
+<body class="dark relative overflow-x-hidden">
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="stars-bg" id="starsContainer"></div>
+
+  <!-- Ambient orbs -->
+  <div class="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+    <div class="absolute top-[20%] left-[15%] w-80 h-80 rounded-full opacity-[0.07] animate-pulse-slow"
+      style="background:radial-gradient(circle,#818cf8,transparent 70%);filter:blur(60px);"></div>
+    <div class="absolute bottom-[30%] right-[10%] w-64 h-64 rounded-full opacity-[0.05] animate-pulse-slow"
+      style="background:radial-gradient(circle,#7dd3fc,transparent 70%);filter:blur(50px);animation-delay:2.5s;"></div>
+    <div class="absolute top-[60%] left-[60%] w-48 h-48 rounded-full opacity-[0.04] animate-pulse-slow"
+      style="background:radial-gradient(circle,#c4b5fd,transparent 70%);filter:blur(40px);animation-delay:1.2s;"></div>
+  </div>
+
+  <!-- ====================================================
+       NAVBAR
+  ===================================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home"
+        class="font-mono text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+        <span class="text-indigo-400">~/</span>simone-stellati
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#about" class="nav-link" id="nav-about">About</a>
+        <a href="#research" class="nav-link" id="nav-research">Research</a>
+        <a href="#publications" class="nav-link" id="nav-publications">Publications</a>
+        <a href="#timeline" class="nav-link" id="nav-timeline">Timeline</a>
+        <a href="#outreach" class="nav-link" id="nav-outreach">Outreach</a>
+        <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+      </nav>
+      <button id="menuToggle" class="md:hidden text-slate-400 hover:text-white transition-colors p-1"
+        aria-label="Toggle menu">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden px-6 pb-4"
+      style="background:rgba(6,7,13,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.05);">
+      <nav class="flex flex-col gap-4 pt-3">
+        <a href="#about" class="nav-link mobile-nl text-sm">About</a>
+        <a href="#research" class="nav-link mobile-nl text-sm">Research</a>
+        <a href="#publications" class="nav-link mobile-nl text-sm">Publications</a>
+        <a href="#timeline" class="nav-link mobile-nl text-sm">Timeline</a>
+        <a href="#outreach" class="nav-link mobile-nl text-sm">Outreach</a>
+        <a href="#contact" class="nav-link mobile-nl text-sm">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================
+       HERO
+  ===================================================== -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8"
+        style="border:1px solid rgba(129,140,248,0.3);background:rgba(129,140,248,0.06);">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-mono text-indigo-300 text-xs uppercase tracking-widest">PhD Student · Sapienza Università
+          di Roma</span>
+      </div>
+
+      <h1 class="font-bold tracking-tight leading-none mb-4" style="font-size:clamp(3rem,9vw,5.5rem);">
+        <span class="text-slate-100">Simone</span><br />
+        <span class="gradient-text">Stellati</span>
+      </h1>
+
+      <p class="text-slate-400 font-mono mt-6 mb-10 tracking-wide" style="font-size:clamp(0.8rem,2vw,1rem);">
+        Observational Cosmology &nbsp;&bull;&nbsp; CMB Polarization &nbsp;&bull;&nbsp;
+        <span class="text-sky-400">LiteBIRD</span> Collaboration
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#research" class="btn-primary">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+          Explore Research
+        </a>
+        <a href="#publications" class="btn-secondary">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Publications
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contact
+        </a>
+      </div>
+
+      <div
+        class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-slate-600 text-xs font-mono animate-float">
+        <span>scroll</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       ABOUT
+  ===================================================== -->
+  <section id="about" class="relative z-10 py-24 px-6">
+    <div class="section-sep mb-0"></div>
+    <div class="max-w-5xl mx-auto pt-12">
+      <div class="grid md:grid-cols-5 gap-12 items-start">
+
+        <!-- Photo Carousel -->
+        <div class="md:col-span-5 flex flex-col items-center justify-center reveal mb-6">
+          <div style="position:relative;width:250px;height:250px;margin-bottom:30px;">
+            <div id="photo-carousel">
+              <!-- Images injected via JS -->
+            </div>
+            <!-- Online indicator -->
+            <div
+              style="position:absolute;bottom:28px;right:28px;width:18px;height:18px;background:#10b981;border-radius:50%;border:2px solid #06070d;z-index:10;box-shadow:0 0 10px rgba(16,185,129,0.4);">
+            </div>
+            <!-- Dots -->
+            <div class="carousel-dots" id="carousel-dots"></div>
+          </div>
+        </div>
+
+        <div class="md:col-span-3 reveal">
+          <p class="section-label mb-2">01 / About Me</p>
+          <h2 class="section-title">Exploring the <span class="gradient-text">Cosmos</span></h2>
+          <div class="section-divider"></div>
+          <div class="space-y-4 text-slate-400 leading-relaxed text-sm">
+            <p>
+              I am a PhD student in <strong class="text-slate-200">Astronomy, Astrophysics and Space Science</strong>
+              at
+              <strong class="text-slate-200">Sapienza Università di Roma</strong>, working under the supervision of
+              <strong class="text-slate-200">Prof. Francesco Piacentini</strong>. My research lies at the intersection
+              of
+              observational cosmology, precision instrumentation, and modern data analysis.
+            </p>
+            <p>
+              I work on the <strong class="text-sky-400">Cosmic Microwave Background (CMB)</strong> — the relic
+              radiation from the Big Bang — with a focus on characterising systematic effects that could contaminate
+              the detection of primordial gravitational waves through B-mode polarisation. I am an active member of
+              the <strong class="text-indigo-400">LiteBIRD</strong> collaboration, a JAXA-led strategic space mission
+              targeting &delta;r &lt; 0.001 for the tensor-to-scalar ratio from the Sun–Earth L2 Lagrange point.
+            </p>
+            <p>
+              I hold a <strong class="text-slate-200">Bachelor's degree in Physics</strong> and a
+              <strong class="text-slate-200">Master's degree in Astronomy and Astrophysics with honors</strong>, both
+              from Sapienza.
+              Born in the <strong class="text-slate-200">United Kingdom</strong>, I have been based in Rome for most of
+              my life.
+            </p>
+            <p>
+              Outside research, I am a competitive volleyball player at
+              <strong class="text-slate-200">regional level (FIPAV Lazio)</strong> and coach a youth male team —
+              a passion for sport that mirrors my belief in collaboration, discipline, and continuous improvement.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-8">
+            <span class="skill-badge border-indigo-500/30 text-indigo-300" style="background:rgba(99,102,241,0.08)">🎓
+              Sapienza Università di Roma</span>
+            <span class="skill-badge border-sky-500/30 text-sky-300" style="background:rgba(14,165,233,0.08)">🇬🇧 Born
+              in the UK</span>
+            <span class="skill-badge border-emerald-500/30 text-emerald-300"
+              style="background:rgba(16,185,129,0.08)">🇮🇹 Rome, Italy</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-4 reveal" style="transition-delay:0.15s;">
+          <div class="glass-card p-5">
+            <p class="text-xs font-mono text-indigo-400 uppercase tracking-widest mb-3">Affiliation</p>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-3">
+                <span class="text-lg mt-0.5">🏛️</span>
+                <div>
+                  <p class="text-slate-200 font-medium">Sapienza Università di Roma</p>
+                  <p class="text-slate-500 text-xs">Dept. of Physics · INFN Roma 1</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-lg mt-0.5">🔭</span>
+                <div>
+                  <p class="text-slate-200 font-medium">INAF – Obs. Astronomico di Roma</p>
+                  <p class="text-slate-500 text-xs">Outreach partner · Monte Porzio Catone &amp; Monte Mario</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-lg mt-0.5">🛰️</span>
+                <div>
+                  <p class="text-slate-200 font-medium">LiteBIRD Collaboration</p>
+                  <p class="text-slate-500 text-xs">JAXA L-class space mission</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card p-5">
+            <p class="text-xs font-mono text-sky-400 uppercase tracking-widest mb-3">Education</p>
+            <div class="space-y-3 text-sm">
+              <div>
+                <p class="text-slate-200 font-medium">PhD — Astronomy, Astrophysics &amp; Space Science</p>
+                <p class="text-slate-500 text-xs">Sapienza Università di Roma · in progress</p>
+              </div>
+              <div>
+                <p class="text-slate-200 font-medium">MSc — Astronomy &amp; Astrophysics</p>
+                <p class="text-slate-500 text-xs">Sapienza Università di Roma</p>
+              </div>
+              <div>
+                <p class="text-slate-200 font-medium">BSc — Physics</p>
+                <p class="text-slate-500 text-xs">Sapienza Università di Roma</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card p-5">
+            <p class="text-xs font-mono text-violet-400 uppercase tracking-widest mb-2">PhD Supervisor</p>
+            <p class="text-slate-200 font-medium text-sm">Prof. Francesco Piacentini</p>
+            <p class="text-slate-500 text-xs mt-0.5">Sapienza Università di Roma</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       RESEARCH
+  ===================================================== -->
+  <section id="research" class="relative z-10 py-24 px-6">
+    <div class="section-sep mb-0"></div>
+    <div class="max-w-5xl mx-auto pt-12">
+      <div class="text-center mb-14 reveal">
+        <p class="section-label mb-2">02 / Research</p>
+        <h2 class="section-title">Research <span class="gradient-text">Focus Areas</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="glass-card p-7 reveal">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
+              style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);">🌌</div>
+            <h3 class="text-slate-200 font-semibold text-base">CMB Observational Cosmology</h3>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            The Cosmic Microwave Background encodes the universe's earliest moments. My work targets the B-mode
+            polarization signal — a faint imprint of primordial gravitational waves generated during cosmic inflation.
+            To detect this elusive signal, my research focuses on instrument definition and requirements, alongside
+            advanced data analysis techniques to disentangle the primordial signal from instrumental systematics and
+            astrophysical foregrounds such as galactic dust and synchrotron emission.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge text-indigo-300 text-xs border-indigo-500/25"
+              style="background:rgba(99,102,241,0.08)">B-mode Polarization</span>
+            <span class="skill-badge text-indigo-300 text-xs border-indigo-500/25"
+              style="background:rgba(99,102,241,0.08)">Inflation</span>
+            <span class="skill-badge text-indigo-300 text-xs border-indigo-500/25"
+              style="background:rgba(99,102,241,0.08)">&delta;r</span>
+          </div>
+        </div>
+
+        <div class="glass-card p-7 reveal" style="transition-delay:0.1s;">
+          <div class="flex items-start justify-between gap-3 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
+                style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);">🛰️</div>
+              <h3 class="text-slate-200 font-semibold text-base">LiteBIRD Space Mission</h3>
+            </div>
+            <a href="https://www.isas.jaxa.jp/en/missions/spacecraft/future/litebird.html" target="_blank"
+              rel="noopener noreferrer" title="LiteBIRD official website"
+              style="flex-shrink:0;opacity:0.85;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'"
+              onmouseout="this.style.opacity='0.85'">
+              <img src="LiteBIRD-logo-nega-RGB.png" alt="LiteBIRD logo"
+                style="height:85px;width:auto;filter:brightness(0.95);">
+            </a>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            LiteBIRD (JAXA L-class, launch ~mid-2030s) will operate from the Sun–Earth L2 point for three years,
+            covering 15 frequency bands between 34 and 448 GHz across three telescopes. I contribute to systematic
+            effect characterisation and mitigation, ensuring optical components meet the mission's unprecedented
+            sensitivity requirement of ~2.2 &micro;K·arcmin.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge text-sky-300 text-xs border-sky-500/25"
+              style="background:rgba(14,165,233,0.08)">JAXA L-class</span>
+            <span class="skill-badge text-sky-300 text-xs border-sky-500/25" style="background:rgba(14,165,233,0.08)">L2
+              Orbit</span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Tech stack -->
+      <div class="mt-8 glass-card p-6 reveal">
+        <p class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-4">Technical Stack</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">Python</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">NumPy / SciPy</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">healpy / HEALPix</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">PyTorch</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">LiteBIRD Sim. Tools</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">Matplotlib</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">Git / GitHub</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">LaTeX</span>
+          <span class="skill-badge text-slate-300 text-xs"
+            style="border-color:rgba(100,116,139,0.4);background:rgba(71,85,105,0.15)">HPC / SLURM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       PUBLICATIONS
+  ===================================================== -->
+  <section id="publications" class="relative z-10 py-24 px-6">
+    <div class="section-sep mb-0"></div>
+    <div class="max-w-5xl mx-auto pt-12">
+      <div class="text-center mb-14 reveal">
+        <p class="section-label mb-2">03 / Publications</p>
+        <h2 class="section-title">Selected <span class="gradient-text">Publications</span></h2>
+        <div class="section-divider mx-auto"></div>
+        <p class="text-slate-500 text-sm mt-1">Peer-reviewed articles · most recent first</p>
+      </div>
+
+      <div class="space-y-5">
+
+        <!-- JCAP 2026 — first author -->
+        <div class="pub-card reveal">
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.25);color:#7dd3fc">JCAP</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);color:#6ee7b7">2026</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.25);color:#c4b5fd">LiteBIRD ·
+                HWP</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);color:#86efac">1st
+                author</span>
+            </div>
+            <a href="https://doi.org/10.1088/1475-7516/2026/02/003" target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-1 text-xs text-slate-500 hover:text-sky-400 transition-colors font-mono">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              JCAP 2026(02)003
+            </a>
+          </div>
+          <h3 class="text-slate-200 font-semibold text-base leading-snug mb-2">
+            Systematic effect induced by misalignment in a Reflective Polarization Modulator for CMB, and application to
+            the LiteBIRD case
+          </h3>
+          <p class="text-slate-400 text-sm font-serif italic mb-2">
+            <strong class="text-slate-200 not-italic">S. Stellati</strong>, F. Piacentini, S. Micheli, A. Novelli, F.
+            Columbro, A. Coppolecchia, P. de Bernardis, S. Masi, M. Najafi, A. Occhiuzzi, L. Pagano, A. Paiella,
+            LiteBIRD Collaboration
+          </p>
+          <p class="text-slate-500 text-xs mb-3">
+            <em>Journal of Cosmology and Astroparticle Physics</em> · JCAP02(2026)003 · February 2026
+          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            We characterise systematic errors arising from a constant "wedge-like" misalignment between the rotation and
+            optical axes of a reflective Half-Wave Plate. Using the LiteBIRD simulation framework, we show this
+            introduces HWP-synchronous pointing offsets that primarily mimic lensing B-modes rather than primordial
+            tensor modes, and derive strict upper limits on the allowable misalignment angle to meet mission
+            requirements.
+          </p>
+        </div>
+
+        <!-- LiteBIRD Mission Overview — SPIE 2026 -->
+        <div class="pub-card reveal" style="transition-delay:0.08s;">
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.25);color:#fb923c">SPIE</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(71,85,105,0.25);border:1px solid rgba(71,85,105,0.4);color:#94a3b8">2026</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.25);color:#c4b5fd">LiteBIRD
+                Collab.</span>
+            </div>
+            <a href="https://arxiv.org/abs/2607.25285" target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-1 text-xs text-slate-500 hover:text-sky-400 transition-colors font-mono">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              arXiv:2607.25285
+            </a>
+          </div>
+          <h3 class="text-slate-200 font-semibold text-base leading-snug mb-2">
+            LiteBIRD Mission Overview after Mission Reformation
+          </h3>
+          <p class="text-slate-400 text-sm font-serif italic mb-2">
+            LiteBIRD Collaboration (K. Aizawa, H. Akamatsu, R. Akizawa, …, <strong class="text-slate-200 not-italic">S.
+              Stellati</strong>, … et al., 150+ authors)
+          </p>
+          <p class="text-slate-500 text-xs mb-3">
+            <em>Proc. SPIE — Astronomical Telescopes + Instrumentation 2026</em> · July 2026
+          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Comprehensive overview of the updated LiteBIRD mission concept following reformation activities after the
+            2024 Mission Definition Review. The revised payload uses a single cross-Dragone telescope covering 12
+            frequency bands (40–402 GHz), targeting δr &lt; 0.002 from the Sun–Earth L2 point.
+          </p>
+        </div>
+
+        <!-- Galactic Science preprint — submitted to JCAP -->
+        <div class="pub-card reveal" style="transition-delay:0.12s;">
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(100,116,139,0.2);border:1px solid rgba(100,116,139,0.35);color:#94a3b8">Preprint</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(71,85,105,0.25);border:1px solid rgba(71,85,105,0.4);color:#94a3b8">2026</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.25);color:#c4b5fd">LiteBIRD ·
+                Foregrounds</span>
+            </div>
+            <a href="https://arxiv.org/abs/2607.20080" target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-1 text-xs text-slate-500 hover:text-sky-400 transition-colors font-mono">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              arXiv:2607.20080
+            </a>
+          </div>
+          <h3 class="text-slate-200 font-semibold text-base leading-snug mb-2">
+            Galactic Science with the LiteBIRD satellite: Spectral characterization of diffuse Galactic polarized
+            emission at the angular power spectrum level
+          </h3>
+          <p class="text-slate-400 text-sm font-serif italic mb-2">
+            S. Vinzl, J. Aumont, L. Vacher, R. T. Génova-Santos, D. Adak, A. Rizzieri, …, <strong
+              class="text-slate-200 not-italic">S. Stellati</strong>, … et al. (86+ authors, LiteBIRD Collaboration)
+          </p>
+          <p class="text-slate-500 text-xs mb-3">
+            <em>Submitted to Journal of Cosmology and Astroparticle Physics</em> · July 2026
+          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Forecast of LiteBIRD's ability to characterise polarised dust and synchrotron emission in the diffuse ISM
+            using angular power spectra across 15 frequency bands. Demonstrates that LiteBIRD will measure dust
+            temperature, spectral indices, and spatial correlation with unprecedented precision, opening a new window on
+            the physical conditions of the Milky Way's ISM.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="text-center pt-6 reveal">
+        <a href="https://ui.adsabs.harvard.edu/search/q=author%3AStellati%2C+Simone&sort=date+desc" target="_blank"
+          rel="noopener noreferrer" class="btn-secondary text-sm" id="ads-link">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          Full list on NASA ADS
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       TIMELINE
+  ===================================================== -->
+  <section id="timeline" class="relative z-10 py-24 px-6">
+    <div class="section-sep mb-0"></div>
+    <div class="max-w-5xl mx-auto pt-12">
+      <div class="text-center mb-14 reveal">
+        <p class="section-label mb-2">04 / Timeline</p>
+        <h2 class="section-title">Events, Talks <span class="gradient-text">&amp; Visits</span></h2>
+        <div class="section-divider mx-auto"></div>
+        <p class="text-slate-500 text-sm mt-1">Conferences, workshops, contributed talks &amp; research visits · most
+          recent first</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto space-y-6">
+
+        <!-- Item 1: AstroStat PhD School (Event 5) -->
+        <div class="timeline-item flex gap-5 reveal">
+          <div class="flex flex-col items-center pt-1">
+            <div class="timeline-dot"><svg class="w-3 h-3 text-pink-300" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+              </svg></div>
+            <div class="flex-1 w-px mt-2"
+              style="background:linear-gradient(to bottom,rgba(129,140,248,0.5),transparent);min-height:40px;"></div>
+          </div>
+          <div class="glass-card p-5 flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4">PhD School</span>
+              <span class="text-xs font-mono text-slate-500">Jul 2026</span>
+            </div>
+            <h3 class="text-slate-200 font-semibold text-sm mb-1">AstroStat Fear. No. Statistic.</h3>
+            <p class="text-slate-500 text-xs mb-2">Dotcampus · Roma, Italy 🇮🇹</p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Five days of lectures and hands-on sessions, from classical statistics to Bayesian inference, from neural networks to AI agents, from Monte Carlo techniques to optimization approaches.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2: CMB Frontier workshop (Poster) (Event 3) -->
+        <div class="timeline-item flex gap-5 reveal" style="transition-delay:0.03s;">
+          <div class="flex flex-col items-center pt-1">
+            <div class="timeline-dot"><svg class="w-3 h-3 text-emerald-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd" />
+              </svg></div>
+            <div class="flex-1 w-px mt-2"
+              style="background:linear-gradient(to bottom,rgba(129,140,248,0.5),transparent);min-height:40px;"></div>
+          </div>
+          <div class="glass-card p-5 flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd">Workshop</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">Poster</span>
+              <span class="text-xs font-mono text-slate-500">Jun – Jul 2026</span>
+            </div>
+            <h3 class="text-slate-200 font-semibold text-sm mb-1">Challenges at the CMB Frontier</h3>
+            <p class="text-slate-500 text-xs mb-2">Chino Cultural Complex · Nagano Prefecture, Japan 🇯🇵</p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              International workshop on next-generation CMB science. Poster presentation : <em
+                class="text-slate-300">"Absolute Polarization Angle Requirements for LiteBIRD"</em>,
+              presenting results from ongoing work.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3: CMB Frontier workshop (Talk) (Event 2) -->
+        <div class="timeline-item flex gap-5 reveal" style="transition-delay:0.06s;">
+          <div class="flex flex-col items-center pt-1">
+            <div class="timeline-dot"><svg class="w-3 h-3 text-sky-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd" />
+              </svg></div>
+            <div class="flex-1 w-px mt-2"
+              style="background:linear-gradient(to bottom,rgba(129,140,248,0.5),transparent);min-height:40px;"></div>
+          </div>
+          <div class="glass-card p-5 flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd">Workshop</span>
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(251,146,60,0.15);border:1px solid rgba(251,146,60,0.3);color:#fdba74">Talk</span>
+              <span class="text-xs font-mono text-slate-500">Jun – Jul 2026</span>
+            </div>
+            <h3 class="text-slate-200 font-semibold text-sm mb-1">Challenges at the CMB Frontier</h3>
+            <p class="text-slate-500 text-xs mb-2">Chino Cultural Complex · Nagano Prefecture, Japan 🇯🇵</p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              International workshop on next-generation CMB science. Contributed talk: <em
+                class="text-slate-300">"Systematic effects from HWP misalignment in LiteBIRD"</em>,
+              presenting results from the JCAP 2026 paper and ongoing work.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4: Kavli IPMU visit (Event 1) -->
+        <div class="timeline-item flex gap-5 reveal" style="transition-delay:0.09s;">
+          <div class="flex flex-col items-center pt-1">
+            <div class="timeline-dot"><svg class="w-3 h-3 text-indigo-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                  clip-rule="evenodd" />
+              </svg></div>
+            <div class="flex-1 w-px mt-2"
+              style="background:linear-gradient(to bottom,rgba(129,140,248,0.5),transparent);min-height:40px;"></div>
+          </div>
+          <div class="glass-card p-5 flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:#a5b4fc">Visiting Researcher</span>
+              <span class="text-xs font-mono text-slate-500">May – Jul 2026</span>
+            </div>
+            <h3 class="text-slate-200 font-semibold text-sm mb-1">Kavli Institute for the Physics and Mathematics of the Universe (Kavli IPMU)</h3>
+            <p class="text-slate-500 text-xs mb-2">University of Tokyo · Kashiwa, Japan 🇯🇵</p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Three-month research visit collaborating with the Kavli IPMU LiteBIRD group on systematic effect modelling, simulation pipeline development, and data analysis, in close cooperation with JAXA mission scientists.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 5: ML PhD School (Event 4) -->
+        <div class="timeline-item flex gap-5 reveal" style="transition-delay:0.12s;">
+          <div class="flex flex-col items-center pt-1">
+            <div class="timeline-dot"><svg class="w-3 h-3 text-pink-300" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+              </svg></div>
+            <div class="flex-1 w-px mt-2"
+              style="background:linear-gradient(to bottom,rgba(129,140,248,0.5),transparent);min-height:40px;"></div>
+          </div>
+          <div class="glass-card p-5 flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 text-xs font-mono rounded"
+                style="background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4">PhD School</span>
+              <span class="text-xs font-mono text-slate-500">Apr 2026</span>
+            </div>
+            <h3 class="text-slate-200 font-semibold text-sm mb-1">Overview of essential machine learning concepts and techniques, structured to build knowledge progressively.</h3>
+            <p class="text-slate-500 text-xs mb-2">INAF Astronomical Observatory of Capodimonte · Napoli, Italy 🇮🇹</p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              This four-day school offers an overview of essential machine learning concepts and techniques, structured to build knowledge progressively.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ellipsis: more events not shown -->
+        <!-- Ellipsis: more events not shown -->
+        <div class="flex gap-5 reveal" style="transition-delay:0.15s;">
+          <div class="flex flex-col items-center pt-1">
+            <div class="flex flex-col gap-1.5 mt-1">
+              <span class="w-1.5 h-1.5 rounded-full" style="background:rgba(129,140,248,0.5);"></span>
+              <span class="w-1.5 h-1.5 rounded-full" style="background:rgba(129,140,248,0.3);"></span>
+              <span class="w-1.5 h-1.5 rounded-full" style="background:rgba(129,140,248,0.15);"></span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 py-2">
+            <p class="text-slate-600 text-xs font-mono italic">earlier events not shown — full history on <a
+                href="https://ui.adsabs.harvard.edu/search/q=author%3AStellati%2C+Simone&sort=date+desc" target="_blank"
+                rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 transition-colors">NASA ADS</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       OUTREACH
+  ===================================================== -->
+  <section id="outreach" class="relative z-10 py-24 px-6">
+    <div class="section-sep mb-0"></div>
+    <div class="max-w-5xl mx-auto pt-12">
+      <div class="text-center mb-14 reveal">
+        <p class="section-label mb-2">05 / Outreach</p>
+        <h2 class="section-title">Public Engagement <span class="gradient-text">&amp; Beyond</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="glass-card p-7 reveal">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
+              style="background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.2);">🔭</div>
+            <div>
+              <h3 class="text-slate-200 font-semibold text-sm">Science Communication</h3>
+              <p class="text-slate-500 text-xs">INAF – Osservatorio Astronomico di Roma</p>
+            </div>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            I regularly participate in public engagement activities organised by the INAF Astronomical Observatory of
+            Rome at both the Monte Porzio Catone and Monte Mario sites. These include public observation nights, guided
+            talks and school outreach programmes — making frontier astrophysics accessible and inspiring for audiences
+            of all ages.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge text-yellow-300 text-xs border-yellow-500/25"
+              style="background:rgba(234,179,8,0.08)">Public Talks</span>
+            <span class="skill-badge text-yellow-300 text-xs border-yellow-500/25"
+              style="background:rgba(234,179,8,0.08)">School Visits</span>
+            <span class="skill-badge text-yellow-300 text-xs border-yellow-500/25"
+              style="background:rgba(234,179,8,0.08)">Observation Nights</span>
+            <span class="skill-badge text-yellow-300 text-xs border-yellow-500/25"
+              style="background:rgba(234,179,8,0.08)">INAF OAR</span>
+          </div>
+        </div>
+
+        <div class="glass-card p-7 reveal" style="transition-delay:0.1s;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
+              style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.2);">🏐</div>
+            <div>
+              <h3 class="text-slate-200 font-semibold text-sm">Volleyball — Player &amp; Youth Coach</h3>
+              <p class="text-slate-500 text-xs">FIPAV Lazio · ISVF</p>
+            </div>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            Outside the lab, I compete in the Italian volleyball federation (FIPAV Lazio) at regional level. In
+            parallel, I coach a youth male team, channelling my passion for sport into mentoring the next generation of
+            players. Both roles reflect my deep commitment to teamwork, discipline, and community beyond academia.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge text-orange-300 text-xs border-orange-500/25"
+              style="background:rgba(249,115,22,0.08)">FIPAV</span>
+            <span class="skill-badge text-orange-300 text-xs border-orange-500/25"
+              style="background:rgba(249,115,22,0.08)">Youth Coach</span>
+            <span class="skill-badge text-orange-300 text-xs border-orange-500/25"
+              style="background:rgba(249,115,22,0.08)">Lazio Region</span>
+          </div>
+        </div>
+
+        <!-- CoDiC3 — Sapienza per il carcere -->
+        <div class="glass-card p-7 reveal md:col-span-2" style="transition-delay:0.2s;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
+              style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);">⚖️</div>
+            <div>
+              <h3 class="text-slate-200 font-semibold text-sm">CoDiC3 — Sapienza per il Carcere</h3>
+              <p class="text-slate-500 text-xs">Sapienza Università di Roma · Terza Missione</p>
+            </div>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            I participate in CoDiC3 (Contrasto alle Discriminazioni, Carcere ed Eguaglianza), a Sapienza outreach
+            initiative bringing science communication and cultural activities inside Italian correctional facilities.
+            Rooted in Articles 3 and 27 of the Italian Constitution, the project promotes equality of access to
+            knowledge for incarcerated people through lectures, multimedia labs, and virtual museum visits — working
+            across institutions including Rebibbia and Velletri.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge text-violet-300 text-xs border-violet-500/25"
+              style="background:rgba(139,92,246,0.08)">Science Divulgation</span>
+            <span class="skill-badge text-violet-300 text-xs border-violet-500/25"
+              style="background:rgba(139,92,246,0.08)">Social Inclusion</span>
+            <span class="skill-badge text-violet-300 text-xs border-violet-500/25"
+              style="background:rgba(139,92,246,0.08)">Sapienza · CoDiC3</span>
+            <span class="skill-badge text-violet-300 text-xs border-violet-500/25"
+              style="background:rgba(139,92,246,0.08)">Terza Missione</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       CONTACT
+  ===================================================== -->
+  <section id="contact" class="relative z-10 py-24 px-6 pb-36">
+    <div class="section-sep mb-0"></div>
+    <div class="max-w-5xl mx-auto pt-12">
+      <div class="text-center mb-14 reveal">
+        <p class="section-label mb-2">06 / Contact</p>
+        <h2 class="section-title">Get in <span class="gradient-text">Touch</span></h2>
+        <div class="section-divider mx-auto"></div>
+        <p class="text-slate-500 text-sm mt-2 max-w-md mx-auto">
+          Happy to discuss research collaborations, outreach opportunities, or any questions about my work.
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto">
+        <div class="grid sm:grid-cols-2 gap-3 mb-8 reveal">
+
+          <a href="mailto:simone.stellati@uniroma1.it" id="contact-email" class="contact-icon">
+            <svg class="w-5 h-5 flex-shrink-0" style="color:#818cf8" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <div>
+              <p class="text-slate-300 text-xs font-medium">Email</p>
+              <p class="text-xs text-slate-500 font-mono">simone.stellati@uniroma1.it</p>
+            </div>
+          </a>
+
+          <a href="https://orcid.org/0009-0003-4571-6555" target="_blank" rel="noopener noreferrer" id="contact-orcid"
+            class="contact-icon">
+            <svg class="w-5 h-5 flex-shrink-0" style="color:#6ee7b7" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.878-2.484 3.878-3.722 0-2.016-1.284-3.722-3.884-3.722h-2.291z" />
+            </svg>
+            <div>
+              <p class="text-slate-300 text-xs font-medium">ORCID</p>
+              <p class="text-xs text-slate-500 font-mono">0000-0002-3234-4807</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/stellatisimone" target="_blank" rel="noopener noreferrer" id="contact-github"
+            class="contact-icon">
+            <svg class="w-5 h-5 flex-shrink-0" style="color:#94a3b8" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            <div>
+              <p class="text-slate-300 text-xs font-medium">GitHub</p>
+              <p class="text-xs text-slate-500 font-mono">@stellatisimone</p>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/simone-stellati-466220295/" target="_blank" rel="noopener noreferrer"
+            id="contact-linkedin" class="contact-icon">
+            <svg class="w-5 h-5 flex-shrink-0" style="color:#7dd3fc" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+            <div>
+              <p class="text-slate-300 text-xs font-medium">LinkedIn</p>
+              <p class="text-xs text-slate-500 font-mono">/in/simone-stellati</p>
+            </div>
+          </a>
+
+          <a href="https://ui.adsabs.harvard.edu/search/q=author%3AStellati%2C+Simone&sort=date+desc" target="_blank"
+            rel="noopener noreferrer" id="contact-ads" class="contact-icon">
+            <svg class="w-5 h-5 flex-shrink-0" style="color:#fbbf24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <div>
+              <p class="text-slate-300 text-xs font-medium">NASA ADS</p>
+              <p class="text-xs text-slate-500 font-mono">Astrophysics Data System</p>
+            </div>
+          </a>
+
+          <a href="https://arxiv.org/search/?query=Stellati+Simone&searchtype=author" target="_blank"
+            rel="noopener noreferrer" id="contact-arxiv" class="contact-icon">
+            <svg class="w-5 h-5 flex-shrink-0" style="color:#f87171" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <div>
+              <p class="text-slate-300 text-xs font-medium">arXiv</p>
+              <p class="text-xs text-slate-500 font-mono">Preprints</p>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="text-center reveal" style="transition-delay:0.1s;">
+          <a href="#" id="cv-download"
+            onclick="alert('Ehm... I didn\'t put a download link here yet. Sorry!'); return false;"
+            class="btn-primary text-sm px-8 py-3">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download CV (PDF)
+          </a>
+          <p class="text-slate-600 text-xs font-mono mt-2">Academic curriculum vitae · last updated Jul 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       FOOTER
+  ===================================================== -->
+  <footer class="relative z-10 py-8 px-6" style="border-top:1px solid rgba(255,255,255,0.05);">
+    <div
+      class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-600 text-xs font-mono">
+      <p>&copy; 2026 Simone Stellati</p>
+      <p class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        Sapienza Università di Roma · INFN Roma 1
+      </p>
+      <p>HTML5 &amp; Tailwind CSS</p>
+    </div>
+  </footer>
+
+  <!-- ====================================================
+       SCRIPTS
+  ===================================================== -->
+  <script>
+      // Stars
+      (function () {
+        const container = document.getElementById('starsContainer');
+        for (let i = 0; i < 140; i++) {
+          const s = document.createElement('div');
+          const size = Math.random() * 2.2 + 0.4;
+          const minOp = (Math.random() * 0.12 + 0.04).toFixed(2);
+          const maxOp = (parseFloat(minOp) + Math.random() * 0.45 + 0.08).toFixed(2);
+          s.className = 'star';
+          s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}%;top:${Math.random() * 100}%;--duration:${(Math.random() * 5 + 2).toFixed(1)}s;--delay:${(Math.random() * 5).toFixed(1)}s;--min-opacity:${minOp};--max-opacity:${maxOp};`;
+          container.appendChild(s);
+        }
+      })();
+
+    // Cursor glow
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(6,7,13,0.93)';
+        navbar.style.backdropFilter = 'blur(18px)';
+        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.borderBottom = 'none';
+      }
+    }, { passive: true });
+
+    // Mobile menu
+    const toggle = document.getElementById('menuToggle');
+    const mMenu = document.getElementById('mobile-menu');
+    const mIcon = document.getElementById('menuIcon');
+    const cIcon = document.getElementById('closeIcon');
+    toggle.addEventListener('click', () => {
+      mMenu.classList.toggle('open');
+      mIcon.classList.toggle('hidden');
+      cIcon.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nl').forEach(l => l.addEventListener('click', () => {
+      mMenu.classList.remove('open'); mIcon.classList.remove('hidden'); cIcon.classList.add('hidden');
+    }));
+
+    // Scroll reveal
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // Active nav
+    const sections = ['about', 'research', 'publications', 'timeline', 'outreach', 'contact'];
+    const navEls = sections.map(s => document.getElementById('nav-' + s));
+    const so = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navEls.forEach(l => l && l.classList.remove('active'));
+          const a = document.getElementById('nav-' + e.target.id);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(id => { const el = document.getElementById(id); if (el) so.observe(el); });
+
+    // Photo Carousel Logic
+    (function initCarousel() {
+      if (typeof carouselPhotos === 'undefined' || !carouselPhotos.length) return;
+      const container = document.getElementById('photo-carousel');
+      const dotsContainer = document.getElementById('carousel-dots');
+      if (!container || !dotsContainer) return;
+
+      const imgs = [];
+      const dots = [];
+      let currentIndex = 0;
+
+      carouselPhotos.forEach((photo, i) => {
+        const img = document.createElement('img');
+        img.src = `profile_photo/${photo}`;
+        img.className = i === 0 ? 'carousel-img active' : 'carousel-img';
+        img.alt = 'Profile Photo ' + (i + 1);
+        container.appendChild(img);
+        imgs.push(img);
+
+        const dot = document.createElement('div');
+        dot.className = i === 0 ? 'carousel-dot active' : 'carousel-dot';
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+      });
+
+      if (carouselPhotos.length > 1) {
+        setInterval(() => {
+          imgs[currentIndex].classList.remove('active');
+          dots[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % carouselPhotos.length;
+          imgs[currentIndex].classList.add('active');
+          dots[currentIndex].classList.add('active');
+        }, 4500); // Change image every 4.5 seconds
+      } else {
+        dotsContainer.style.display = 'none';
+      }
+    })();
+  </script>
+</body>
+
+</html>
